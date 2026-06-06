@@ -1,0 +1,7 @@
+.vt-contact-form-card {
+  background: var(--vt-surface);
+  border: 1px solid var(--vt-border);
+  border-radius: var(--vt-radius);
+  padding: 2.5rem;
+  box-shadow: var(--vt-shadow);
+}

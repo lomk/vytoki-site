@@ -1,0 +1,42 @@
+.vt-post-cover {
+  max-height: 480px;
+  overflow: hidden;
+}
+
+.vt-post-cover img {
+  width: 100%;
+  height: 480px;
+  object-fit: cover;
+}
+
+.vt-back-link {
+  display: inline-block;
+  font-size: 0.85rem;
+  color: var(--vt-text-muted);
+  text-decoration: none;
+  margin-bottom: 1.5rem;
+  transition: color 0.15s;
+}
+
+.vt-back-link:hover { color: var(--vt-green); text-decoration: none; }
+
+.vt-post-date {
+  font-size: 0.85rem;
+  color: var(--vt-text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.vt-post-title {
+  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+  color: var(--vt-green);
+  margin-bottom: 0.75rem;
+}
+
+.vt-post-subtitle {
+  font-size: 1.15rem;
+  color: var(--vt-text-muted);
+  font-style: italic;
+  border-left: 3px solid var(--vt-green-light);
+  padding-left: 1rem;
+  margin-bottom: 2rem;
+}

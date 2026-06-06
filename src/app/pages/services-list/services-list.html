@@ -1,0 +1,50 @@
+<div class="vt-page-header">
+  <div class="container">
+    <span class="vt-eyebrow" style="color:rgba(255,255,255,0.65)">Витоки</span>
+    <h1>{{ t('services.title') }}</h1>
+    <p>{{ t('services.subtitle') }}</p>
+  </div>
+</div>
+
+<section class="vt-section">
+  <div class="container">
+    @if (loading) {
+      <div class="vt-loading">
+        <div class="vt-loading-dots"><span></span><span></span><span></span></div>
+      </div>
+    } @else if (services.length === 0) {
+      <p class="vt-text-muted text-center">{{ t('loading') }}</p>
+    } @else {
+      <div class="row g-4 g-lg-5">
+        @for (svc of services; track svc.slug; let i = $index) {
+          <div class="col-md-6">
+            <div class="vt-svc-card">
+              @if (svc.images.length > 0) {
+                <img class="vt-svc-img" [src]="svc.images[0].image" [alt]="svc.images[0].alt || svc.title">
+              } @else {
+                <div class="vt-svc-img-placeholder">
+                  <span class="vt-svc-num">0{{ i + 1 }}</span>
+                </div>
+              }
+              <div class="vt-svc-body">
+                <h2 class="vt-svc-title">{{ svc.title }}</h2>
+                <p class="vt-svc-subtitle">{{ svc.subtitle }}</p>
+                @if (svc.body) {
+                  <p class="vt-svc-desc">{{ svc.body | slice:0:200 }}{{ svc.body.length > 200 ? '…' : '' }}</p>
+                }
+                <div class="d-flex flex-wrap gap-3 mt-4">
+                  <a class="vt-btn vt-btn-primary" [routerLink]="'/services/' + svc.slug">
+                    {{ t('services.cta') }}
+                  </a>
+                  <button class="vt-btn vt-btn-outline" (click)="openConsultation()">
+                    {{ t('services.consultation') }}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    }
+  </div>
+</section>

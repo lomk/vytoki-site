@@ -1,0 +1,16 @@
+.vt-section-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.vt-gallery-img {
+  flex: 1 1 260px;
+  max-width: 100%;
+  border-radius: var(--vt-radius-sm);
+  object-fit: cover;
+  max-height: 300px;
+}
+
+.vt-article-item { margin-bottom: 0.5rem; }

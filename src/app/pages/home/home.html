@@ -1,0 +1,164 @@
+<!-- ════════════════ HERO ════════════════ -->
+<section class="vt-hero">
+  <div class="vt-hero-decor" aria-hidden="true">
+    <svg viewBox="0 0 300 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M150 20 C150 20, 60 100, 60 220 C60 320 100 380 150 400 C200 380 240 320 240 220 C240 100 150 20 150 20Z" fill="rgba(255,255,255,0.05)"/>
+      <path d="M150 400 L150 120" stroke="rgba(255,255,255,0.08)" stroke-width="1.5" stroke-dasharray="4 6"/>
+      <path d="M150 280 C150 280 100 260 80 280" stroke="rgba(255,255,255,0.1)" stroke-width="1.5" fill="none"/>
+      <path d="M150 240 C150 240 200 220 220 240" stroke="rgba(255,255,255,0.1)" stroke-width="1.5" fill="none"/>
+      <circle cx="80" cy="280" r="3" fill="rgba(255,255,255,0.15)"/>
+      <circle cx="220" cy="240" r="3" fill="rgba(255,255,255,0.15)"/>
+    </svg>
+  </div>
+
+  <div class="container" style="position:relative;z-index:1">
+    <div class="row align-items-center gy-5">
+      <div class="col-lg-6">
+        <span class="vt-eyebrow" style="color:rgba(255,255,255,0.65)">{{ t('home.hero.eyebrow') }}</span>
+        <h1 class="vt-hero-title">{{ t('home.hero.title') }}</h1>
+        <p class="vt-hero-subtitle">{{ t('home.hero.subtitle') }}</p>
+        <div class="d-flex flex-wrap gap-3 mt-4">
+          <button class="vt-btn vt-btn-primary vt-btn-lg" (click)="openConsultation()">
+            {{ t('home.hero.cta') }}
+          </button>
+          <a class="vt-btn vt-btn-outline-light vt-btn-lg" routerLink="/services">
+            {{ t('home.hero.cta2') }}
+          </a>
+        </div>
+      </div>
+
+      <div class="col-lg-6 d-flex justify-content-center">
+        <div class="vt-hero-tree" aria-hidden="true">
+          <svg viewBox="0 0 280 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="110" y="185" width="60" height="34" rx="8" fill="rgba(255,255,255,0.18)" stroke="rgba(255,255,255,0.35)" stroke-width="1.5"/>
+            <text x="140" y="207" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="11" font-family="Georgia,serif">Ви</text>
+            <rect x="38" y="115" width="60" height="34" rx="8" fill="rgba(255,255,255,0.13)" stroke="rgba(255,255,255,0.28)" stroke-width="1.5"/>
+            <rect x="182" y="115" width="60" height="34" rx="8" fill="rgba(255,255,255,0.13)" stroke="rgba(255,255,255,0.28)" stroke-width="1.5"/>
+            <rect x="8" y="45" width="50" height="30" rx="7" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.22)" stroke-width="1.5"/>
+            <rect x="76" y="45" width="50" height="30" rx="7" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.22)" stroke-width="1.5"/>
+            <rect x="154" y="45" width="50" height="30" rx="7" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.22)" stroke-width="1.5"/>
+            <rect x="222" y="45" width="50" height="30" rx="7" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.22)" stroke-width="1.5"/>
+            <path d="M140 185 L140 168 L68 168 L68 149" stroke="rgba(255,255,255,0.28)" stroke-width="1.5" fill="none"/>
+            <path d="M140 185 L140 168 L212 168 L212 149" stroke="rgba(255,255,255,0.28)" stroke-width="1.5" fill="none"/>
+            <path d="M68 115 L68 92 L33 92 L33 75" stroke="rgba(255,255,255,0.18)" stroke-width="1.2" fill="none"/>
+            <path d="M68 115 L68 92 L101 92 L101 75" stroke="rgba(255,255,255,0.18)" stroke-width="1.2" fill="none"/>
+            <path d="M212 115 L212 92 L179 92 L179 75" stroke="rgba(255,255,255,0.18)" stroke-width="1.2" fill="none"/>
+            <path d="M212 115 L212 92 L247 92 L247 75" stroke="rgba(255,255,255,0.18)" stroke-width="1.2" fill="none"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ SERVICES ════════════════ -->
+<section class="vt-section">
+  <div class="container">
+    <div class="vt-section-header centered">
+      <span class="vt-eyebrow">{{ t('home.services.eyebrow') }}</span>
+      <h2>{{ t('home.services.title') }}</h2>
+      <div class="vt-divider"></div>
+      <p class="vt-lead">{{ t('home.services.subtitle') }}</p>
+    </div>
+
+    @if (loading) {
+      <div class="vt-loading">
+        <div class="vt-loading-dots"><span></span><span></span><span></span></div>
+      </div>
+    } @else {
+      <div class="row g-4">
+        @for (svc of services; track svc.slug; let i = $index) {
+          <div class="col-sm-6 col-lg-3">
+            <a class="vt-card vt-service-item" [routerLink]="'/services/' + svc.slug">
+              @if (svc.images.length > 0) {
+                <img class="vt-card-img" [src]="svc.images[0].image" [alt]="svc.images[0].alt || svc.title">
+              } @else {
+                <div class="vt-card-img-placeholder">
+                  <svg width="44" height="44" viewBox="0 0 24 24" [innerHTML]="serviceIcons[i % serviceIcons.length]"></svg>
+                </div>
+              }
+              <div class="vt-card-body">
+                <h3 class="vt-service-card-title">{{ svc.title }}</h3>
+                <p class="vt-service-card-desc">{{ svc.subtitle }}</p>
+                <span class="vt-service-link">{{ t('home.services.cta') }} →</span>
+              </div>
+            </a>
+          </div>
+        }
+      </div>
+    }
+  </div>
+</section>
+
+<!-- ════════════════ WHY US ════════════════ -->
+<section class="vt-section vt-section-alt">
+  <div class="container">
+    <div class="vt-section-header centered">
+      <span class="vt-eyebrow">{{ t('home.why.eyebrow') }}</span>
+      <h2>{{ t('home.why.title') }}</h2>
+      <div class="vt-divider"></div>
+    </div>
+
+    <div class="row g-4">
+      @for (n of whyItems; track n) {
+        <div class="col-sm-6 col-lg-3">
+          <div class="vt-why-card">
+            <div class="vt-why-num">0{{ n }}</div>
+            <h4>{{ t('home.why.' + n + '.title') }}</h4>
+            <p>{{ t('home.why.' + n + '.text') }}</p>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ BLOG ════════════════ -->
+@if (recentPosts.length > 0) {
+  <section class="vt-section">
+    <div class="container">
+      <div class="vt-section-header-row">
+        <div>
+          <span class="vt-eyebrow">{{ t('home.blog.eyebrow') }}</span>
+          <h2 style="margin:0">{{ t('home.blog.title') }}</h2>
+        </div>
+        <a class="vt-btn vt-btn-outline" routerLink="/blog">{{ t('home.blog.cta') }}</a>
+      </div>
+
+      <div class="row g-4" style="margin-top:0.5rem">
+        @for (post of recentPosts; track post.slug) {
+          <div class="col-md-4">
+            <a class="vt-blog-card" [routerLink]="'/blog/' + post.slug">
+              @if (post.cover_image) {
+                <img class="vt-blog-card-img" [src]="post.cover_image" [alt]="post.title">
+              } @else {
+                <div class="vt-blog-card-placeholder">
+                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--vt-green-mid)" stroke-width="1.5" aria-hidden="true">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
+                  </svg>
+                </div>
+              }
+              <div class="vt-blog-card-body">
+                <div class="vt-blog-card-date">{{ formatDate(post.published_at) }}</div>
+                <div class="vt-blog-card-title">{{ post.title }}</div>
+                <p class="vt-blog-card-excerpt">{{ post.subtitle || post.seo_description }}</p>
+                <span class="vt-service-link">{{ t('blog.readMore') }} →</span>
+              </div>
+            </a>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+}
+
+<!-- ════════════════ CTA BANNER ════════════════ -->
+<section class="vt-section vt-section-green">
+  <div class="container" style="text-align:center">
+    <h2>{{ t('home.cta.title') }}</h2>
+    <p style="color:rgba(255,255,255,0.75);max-width:440px;margin:0 auto 2rem;font-size:1.1rem">{{ t('home.cta.subtitle') }}</p>
+    <button class="vt-btn vt-btn-outline-light vt-btn-lg" (click)="openConsultation()">
+      {{ t('home.cta.btn') }}
+    </button>
+  </div>
+</section>

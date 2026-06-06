@@ -1,0 +1,5 @@
+/* AppComponent scoped styles (header extras handled globally in styles.css) */
+
+.invalid {
+  border-color: #ef4444 !important;
+}

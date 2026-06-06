@@ -1,0 +1,6 @@
+/* Blog card styles are in global styles.css */
+.vt-service-link {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--vt-green-mid);
+}

@@ -1,0 +1,55 @@
+.vt-svc-card {
+  background: var(--vt-surface);
+  border-radius: var(--vt-radius);
+  border: 1px solid var(--vt-border);
+  overflow: hidden;
+  box-shadow: var(--vt-shadow);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.vt-svc-card:hover {
+  box-shadow: var(--vt-shadow-hover);
+  transform: translateY(-2px);
+}
+
+.vt-svc-img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+}
+
+.vt-svc-img-placeholder {
+  width: 100%;
+  height: 240px;
+  background: linear-gradient(135deg, var(--vt-green-pale), var(--vt-beige));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vt-svc-num {
+  font-family: var(--vt-font-heading);
+  font-size: 4rem;
+  color: var(--vt-green-light);
+  font-weight: 400;
+}
+
+.vt-svc-body { padding: 2rem; flex: 1; display: flex; flex-direction: column; }
+
+.vt-svc-title { font-size: 1.5rem; margin-bottom: 0.6rem; }
+
+.vt-svc-subtitle {
+  font-size: 1rem;
+  color: var(--vt-text-muted);
+  font-style: italic;
+  margin-bottom: 0.75rem;
+}
+
+.vt-svc-desc {
+  font-size: 0.9rem;
+  color: var(--vt-text-muted);
+  line-height: 1.7;
+}

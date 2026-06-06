@@ -1,0 +1,56 @@
+<div class="vt-page-header">
+  <div class="container">
+    <h1>{{ t('pricing.title') }}</h1>
+    <p>{{ t('pricing.subtitle') }}</p>
+  </div>
+</div>
+
+<section class="vt-section">
+  <div class="container">
+    @if (loading) {
+      <div class="vt-loading">
+        <div class="vt-loading-dots"><span></span><span></span><span></span></div>
+      </div>
+    } @else if (plans.length === 0) {
+      <div style="text-align:center;padding:4rem 0">
+        <p class="vt-text-muted">{{ t('loading') }}</p>
+        <button class="vt-btn vt-btn-primary" style="margin-top:1rem" (click)="openConsultation()">
+          {{ t('home.hero.cta') }}
+        </button>
+      </div>
+    } @else {
+      <div class="row g-4 justify-content-center">
+        @for (plan of plans; track plan.slug) {
+          <div class="col-sm-6 col-lg-3">
+            <div class="vt-pricing-card" [class.featured]="plan.is_featured">
+              @if (plan.is_featured) {
+                <div class="vt-pricing-badge">{{ t('nav.services') }}</div>
+              }
+              <h3 style="font-size:1.2rem;margin-bottom:0.25rem">{{ plan.name }}</h3>
+              <p style="font-size:0.875rem;color:var(--vt-text-muted);margin:0">{{ plan.description }}</p>
+              <div class="vt-pricing-price">{{ plan.price_display }}</div>
+              <ul class="vt-pricing-features">
+                @for (feature of plan.features; track $index) {
+                  <li>
+                    <svg class="vt-check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                      <polyline points="2 8 6 12 14 4"/>
+                    </svg>
+                    {{ feature }}
+                  </li>
+                }
+              </ul>
+              <button class="vt-btn vt-btn-primary" style="width:100%;justify-content:center" (click)="openConsultation()">
+                {{ t('pricing.cta') }}
+              </button>
+            </div>
+          </div>
+        }
+      </div>
+
+      <div style="text-align:center;margin-top:3rem;padding:2rem;background:var(--vt-bg-alt);border-radius:var(--vt-radius)">
+        <p style="margin:0 0 1rem;color:var(--vt-text-muted)">{{ t('pricing.custom') }}</p>
+        <button class="vt-btn vt-btn-outline" (click)="openConsultation()">{{ t('pricing.customCta') }}</button>
+      </div>
+    }
+  </div>
+</section>

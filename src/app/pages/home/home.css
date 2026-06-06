@@ -1,0 +1,119 @@
+/* ─── Hero ─────────────────────────────────────────────────── */
+.vt-hero {
+  background: linear-gradient(135deg, var(--vt-green) 0%, #1a3817 60%, #243d20 100%);
+  color: #fff;
+  padding: 6rem 0 5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.vt-hero-decor {
+  position: absolute;
+  right: -40px;
+  top: -30px;
+  width: 420px;
+  height: 560px;
+  pointer-events: none;
+}
+
+.vt-hero-title {
+  font-size: clamp(2rem, 4vw, 2.9rem);
+  color: #fff;
+  margin-bottom: 1.25rem;
+  line-height: 1.15;
+}
+
+.vt-hero-subtitle {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.78);
+  max-width: 520px;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.vt-hero-tree {
+  max-width: 320px;
+  width: 100%;
+  filter: drop-shadow(0 8px 32px rgba(0,0,0,0.2));
+}
+
+.vt-hero-tree svg { width: 100%; height: auto; }
+
+/* ─── Service cards ──────────────────────────────────────── */
+.vt-service-item {
+  display: block;
+  text-decoration: none;
+  color: var(--vt-text);
+  height: 100%;
+}
+
+.vt-service-item:hover { color: var(--vt-text); text-decoration: none; }
+
+.vt-service-card-title {
+  font-size: 1.05rem;
+  margin-bottom: 0.5rem;
+  color: var(--vt-green);
+}
+
+.vt-service-card-desc {
+  font-size: 0.875rem;
+  color: var(--vt-text-muted);
+  margin-bottom: 1rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.vt-service-link {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--vt-green-mid);
+}
+
+/* ─── Why Us ─────────────────────────────────────────────── */
+.vt-why-card {
+  padding: 2rem 1.75rem;
+  background: var(--vt-surface);
+  border-radius: var(--vt-radius);
+  border: 1px solid var(--vt-border);
+  height: 100%;
+  transition: box-shadow 0.2s;
+}
+
+.vt-why-card:hover { box-shadow: var(--vt-shadow-hover); }
+
+.vt-why-num {
+  font-family: var(--vt-font-heading);
+  font-size: 2.5rem;
+  color: var(--vt-green-light);
+  line-height: 1;
+  margin-bottom: 1rem;
+  font-weight: 400;
+}
+
+.vt-why-card h4 {
+  font-size: 1.05rem;
+  margin-bottom: 0.5rem;
+}
+
+.vt-why-card p {
+  font-size: 0.875rem;
+  color: var(--vt-text-muted);
+  margin: 0;
+}
+
+/* ─── Section header row ─────────────────────────────────── */
+.vt-section-header-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+/* ─── CTA Banner ─────────────────────────────────────────── */
+.vt-section-green h2 {
+  color: #fff;
+}

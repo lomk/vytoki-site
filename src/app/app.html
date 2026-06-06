@@ -1,0 +1,262 @@
+<div class="vt-page">
+
+  <!-- ═══════════════════ HEADER ═══════════════════ -->
+  <header class="vt-header">
+    <div class="container">
+
+      <!-- Logo -->
+      <a class="vt-logo" routerLink="/" (click)="closeNav()" aria-label="Витоки — на головну">
+        <svg class="vt-logo-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="18" cy="18" r="17" fill="#edf4eb" stroke="#2d5a27" stroke-width="1.5"/>
+          <path d="M18 8 C18 8, 10 14, 10 20 C10 25 13.5 28 18 28 C22.5 28 26 25 26 20 C26 14 18 8 18 8Z" fill="#2d5a27" opacity="0.85"/>
+          <path d="M18 28 L18 16" stroke="#edf4eb" stroke-width="1" stroke-linecap="round"/>
+          <path d="M18 22 C18 22 14 20 12 22" stroke="#edf4eb" stroke-width="0.8" stroke-linecap="round" fill="none"/>
+          <path d="M18 19 C18 19 22 17 24 19" stroke="#edf4eb" stroke-width="0.8" stroke-linecap="round" fill="none"/>
+        </svg>
+        <div class="vt-logo-text">
+          Витоки
+          <span>Архівний пошук &amp; Генеалогія</span>
+        </div>
+      </a>
+
+      <!-- Mobile toggle -->
+      <button class="vt-menu-toggle" (click)="toggleMenu()" [attr.aria-expanded]="menuOpen" aria-label="Меню">
+        <svg width="20" height="16" viewBox="0 0 20 16" fill="currentColor">
+          @if (menuOpen) {
+            <path d="M1 1L19 15M19 1L1 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+          } @else {
+            <path d="M0 1h20M0 8h20M0 15h20" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+          }
+        </svg>
+      </button>
+
+      <!-- Nav wrap -->
+      <div class="vt-nav-wrap" [class.open]="menuOpen">
+        <ul class="vt-nav">
+
+          <li>
+            <a class="vt-nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" (click)="closeNav()">
+              {{ t('nav.home') }}
+            </a>
+          </li>
+
+          <li>
+            <a class="vt-nav-link" routerLink="/about" routerLinkActive="active" (click)="closeNav()">
+              {{ t('nav.about') }}
+            </a>
+          </li>
+
+          <!-- Services dropdown -->
+          <li class="vt-dropdown">
+            <button class="vt-nav-link" (click)="toggleServicesDropdown($event)" [class.active]="servicesDropdownOpen" type="button">
+              {{ t('nav.services') }}
+              <svg width="10" height="6" viewBox="0 0 10 6" fill="currentColor" style="margin-left:2px">
+                <path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+              </svg>
+            </button>
+            @if (servicesDropdownOpen) {
+              <div class="vt-dropdown-menu">
+                @for (svc of services; track svc.slug) {
+                  <a class="vt-dropdown-item" [routerLink]="'/services/' + svc.slug" (click)="closeNav()">
+                    {{ svc.title }}
+                  </a>
+                }
+              </div>
+            }
+          </li>
+
+          <li>
+            <a class="vt-nav-link" routerLink="/pricing" routerLinkActive="active" (click)="closeNav()">
+              {{ t('nav.pricing') }}
+            </a>
+          </li>
+
+          <li>
+            <a class="vt-nav-link" routerLink="/faq" routerLinkActive="active" (click)="closeNav()">
+              {{ t('nav.faq') }}
+            </a>
+          </li>
+
+          <li>
+            <a class="vt-nav-link" routerLink="/blog" routerLinkActive="active" (click)="closeNav()">
+              {{ t('nav.blog') }}
+            </a>
+          </li>
+
+          <li>
+            <a class="vt-nav-link" routerLink="/contacts" routerLinkActive="active" (click)="closeNav()">
+              {{ t('nav.contacts') }}
+            </a>
+          </li>
+
+        </ul>
+
+        <!-- Language + CTA (always visible inside nav wrap) -->
+        <div class="vt-header-actions">
+          <div class="vt-lang" role="group" aria-label="Language">
+            <button class="vt-lang-btn" [class.active]="lang==='uk'" (click)="setLang('uk')">УКР</button>
+            <button class="vt-lang-btn" [class.active]="lang==='ru'" (click)="setLang('ru')">РУС</button>
+            <button class="vt-lang-btn" [class.active]="lang==='en'" (click)="setLang('en')">ENG</button>
+          </div>
+          <button class="vt-btn vt-btn-primary vt-btn-sm" (click)="openModal(); closeNav()">
+            {{ t('header.cta') }}
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ═══════════════════ MAIN ═══════════════════ -->
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+
+  <!-- ═══════════════════ FOOTER ═══════════════════ -->
+  <footer class="vt-footer">
+    <div class="container">
+      <div class="row g-4">
+
+        <!-- Brand -->
+        <div class="col-lg-4">
+          <div style="display:flex;align-items:center;gap:0.6rem;margin-bottom:1rem">
+            <svg width="32" height="32" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+              <circle cx="18" cy="18" r="17" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+              <path d="M18 8 C18 8, 10 14, 10 20 C10 25 13.5 28 18 28 C22.5 28 26 25 26 20 C26 14 18 8 18 8Z" fill="rgba(255,255,255,0.8)"/>
+              <path d="M18 28 L18 16" stroke="rgba(45,90,39,0.5)" stroke-width="1" stroke-linecap="round"/>
+            </svg>
+            <span style="font-family:var(--vt-font-heading);font-size:1.35rem;color:#fff;font-weight:600">Витоки</span>
+          </div>
+          <p style="font-size:0.875rem;color:rgba(255,255,255,0.6);line-height:1.6;margin:0">
+            {{ t('footer.tagline') }}
+          </p>
+        </div>
+
+        <!-- Nav -->
+        <div class="col-6 col-lg-2">
+          <h4>{{ t('nav.services') }}</h4>
+          <ul class="vt-footer-links">
+            <li><a routerLink="/services">{{ t('nav.services') }}</a></li>
+            <li><a routerLink="/pricing">{{ t('nav.pricing') }}</a></li>
+            <li><a routerLink="/faq">{{ t('nav.faq') }}</a></li>
+            <li><a routerLink="/blog">{{ t('nav.blog') }}</a></li>
+          </ul>
+        </div>
+
+        <div class="col-6 col-lg-2">
+          <h4>{{ t('nav.about') }}</h4>
+          <ul class="vt-footer-links">
+            <li><a routerLink="/about">{{ t('nav.about') }}</a></li>
+            <li><a routerLink="/social-program">{{ t('nav.social') }}</a></li>
+            <li><a routerLink="/contacts">{{ t('nav.contacts') }}</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-4">
+          <h4>{{ t('nav.contacts') }}</h4>
+          <button class="vt-btn vt-btn-outline-light" style="margin-bottom:1rem" (click)="openModal()">
+            {{ t('header.cta') }}
+          </button>
+          <div style="font-size:0.875rem;color:rgba(255,255,255,0.6)">
+            <a routerLink="/privacy-policy" style="color:rgba(255,255,255,0.6);margin-right:1rem">{{ t('footer.privacy') }}</a>
+            <a routerLink="/public-offer" style="color:rgba(255,255,255,0.6)">{{ t('footer.offer') }}</a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="vt-footer-bottom">
+        <span>&copy; {{ currentYear }} {{ t('footer.copyright') }}</span>
+        <div style="display:flex;gap:1rem">
+          <a routerLink="/privacy-policy">{{ t('footer.privacy') }}</a>
+          <a routerLink="/public-offer">{{ t('footer.offer') }}</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<!-- ═══════════════════ CONSULTATION MODAL ═══════════════════ -->
+@if (showModal) {
+  <div class="vt-modal-overlay" (click)="onOverlayClick($event)" role="dialog" aria-modal="true" [attr.aria-label]="t('consultation.title')">
+    <div class="vt-modal">
+
+      <div class="vt-modal-header">
+        <div>
+          <h3>{{ t('consultation.title') }}</h3>
+          <p style="margin:0.35rem 0 0;font-size:0.85rem;color:var(--vt-text-muted)">{{ t('consultation.subtitle') }}</p>
+        </div>
+        <button class="vt-modal-close" (click)="closeModal()" aria-label="Закрити">&times;</button>
+      </div>
+
+      <div class="vt-modal-body">
+
+        @if (formState === 'success') {
+          <div class="vt-alert vt-alert-success">
+            <strong>✓</strong> {{ t('consultation.success') }}
+          </div>
+        } @else if (formState === 'error') {
+          <div class="vt-alert vt-alert-error">
+            {{ t('consultation.error') }}
+          </div>
+        }
+
+        @if (formState !== 'success') {
+          <form [formGroup]="consultForm" (ngSubmit)="submitConsultation()">
+
+            <div class="vt-form-group">
+              <label for="c-name">{{ t('consultation.name') }} <span style="color:var(--vt-green)">*</span></label>
+              <input id="c-name" class="vt-form-control" type="text"
+                formControlName="name"
+                [placeholder]="t('consultation.namePlaceholder')"
+                [class.invalid]="consultForm.get('name')!.invalid && consultForm.get('name')!.touched">
+            </div>
+
+            <div class="row g-3">
+              <div class="col-sm-6">
+                <div class="vt-form-group" style="margin-bottom:0">
+                  <label for="c-email">{{ t('consultation.email') }}</label>
+                  <input id="c-email" class="vt-form-control" type="email"
+                    formControlName="email"
+                    [placeholder]="t('consultation.emailPlaceholder')">
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="vt-form-group" style="margin-bottom:0">
+                  <label for="c-phone">{{ t('consultation.phone') }}</label>
+                  <input id="c-phone" class="vt-form-control" type="tel"
+                    formControlName="phone"
+                    [placeholder]="t('consultation.phonePlaceholder')">
+                </div>
+              </div>
+            </div>
+
+            <div class="vt-form-group" style="margin-top:1.1rem">
+              <label for="c-method">{{ t('consultation.contactMethod') }}</label>
+              <select id="c-method" class="vt-form-control" formControlName="contact_method">
+                @for (m of contactMethods; track m) {
+                  <option [value]="m">{{ t('contactMethod.' + m) }}</option>
+                }
+              </select>
+            </div>
+
+            <div class="vt-form-group">
+              <label for="c-message">{{ t('consultation.message') }}</label>
+              <textarea id="c-message" class="vt-form-control" rows="3"
+                formControlName="message"
+                [placeholder]="t('consultation.messagePlaceholder')"></textarea>
+            </div>
+
+            <button class="vt-btn vt-btn-primary" type="submit" style="width:100%"
+              [disabled]="formState === 'sending' || consultForm.invalid">
+              {{ formState === 'sending' ? t('consultation.sending') : t('consultation.submit') }}
+            </button>
+
+          </form>
+        }
+
+      </div>
+    </div>
+  </div>
+}

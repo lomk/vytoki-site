@@ -1,0 +1,45 @@
+<div class="vt-page-header">
+  <div class="container">
+    <h1>{{ t('blog.title') }}</h1>
+    <p>{{ t('blog.subtitle') }}</p>
+  </div>
+</div>
+
+<section class="vt-section">
+  <div class="container">
+    @if (loading) {
+      <div class="vt-loading">
+        <div class="vt-loading-dots"><span></span><span></span><span></span></div>
+      </div>
+    } @else if (posts.length === 0) {
+      <p class="vt-text-muted text-center" style="padding:4rem 0">{{ t('blog.empty') }}</p>
+    } @else {
+      <div class="row g-4">
+        @for (post of posts; track post.slug) {
+          <div class="col-md-6 col-lg-4">
+            <a class="vt-blog-card" [routerLink]="'/blog/' + post.slug">
+              @if (post.cover_image) {
+                <img class="vt-blog-card-img" [src]="post.cover_image" [alt]="post.title" loading="lazy">
+              } @else {
+                <div class="vt-blog-card-placeholder">
+                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--vt-green-mid)" stroke-width="1.5" aria-hidden="true">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                    <polyline points="14 2 14 8 20 8"/>
+                    <line x1="9" y1="13" x2="15" y2="13"/>
+                    <line x1="9" y1="17" x2="15" y2="17"/>
+                  </svg>
+                </div>
+              }
+              <div class="vt-blog-card-body">
+                <div class="vt-blog-card-date">{{ formatDate(post.published_at) }}</div>
+                <div class="vt-blog-card-title">{{ post.title }}</div>
+                <p class="vt-blog-card-excerpt">{{ post.subtitle || post.seo_description }}</p>
+                <span class="vt-service-link">{{ t('blog.readMore') }} →</span>
+              </div>
+            </a>
+          </div>
+        }
+      </div>
+    }
+  </div>
+</section>

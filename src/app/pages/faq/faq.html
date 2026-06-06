@@ -1,0 +1,38 @@
+<div class="vt-page-header">
+  <div class="container">
+    <h1>{{ t('faq.title') }}</h1>
+    <p>{{ t('faq.subtitle') }}</p>
+  </div>
+</div>
+
+<section class="vt-section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+
+        @if (loading) {
+          <div class="vt-loading">
+            <div class="vt-loading-dots"><span></span><span></span><span></span></div>
+          </div>
+        } @else if (items.length === 0) {
+          <p class="vt-text-muted text-center">{{ t('faq.empty') }}</p>
+        } @else {
+          @for (item of items; track item.id) {
+            <div class="vt-faq-item">
+              <button class="vt-faq-question" [class.open]="openId === item.id" (click)="toggle(item.id)" type="button">
+                {{ item.question }}
+                <svg class="vt-faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+                </svg>
+              </button>
+              @if (openId === item.id) {
+                <div class="vt-faq-answer" [innerHTML]="item.answer"></div>
+              }
+            </div>
+          }
+        }
+
+      </div>
+    </div>
+  </div>
+</section>

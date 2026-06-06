@@ -1,0 +1,80 @@
+@if (loading) {
+  <div class="vt-loading" style="padding:8rem 0">
+    <div class="vt-loading-dots"><span></span><span></span><span></span></div>
+  </div>
+} @else if (error || !section) {
+  <div class="vt-page-header"><div class="container"><h1>{{ t('notFound') }}</h1></div></div>
+  <div class="container vt-section-sm" style="text-align:center">
+    <a class="vt-btn vt-btn-outline" href="/">{{ t('backHome') }}</a>
+  </div>
+} @else {
+
+  <div class="vt-page-header">
+    <div class="container">
+      <h1>{{ section.title }}</h1>
+      @if (section.subtitle) { <p>{{ section.subtitle }}</p> }
+    </div>
+  </div>
+
+  <section class="vt-section">
+    <div class="container">
+      <div class="row g-5">
+        <div class="col-lg-8">
+
+          @if (section.images.length > 0) {
+            <div class="vt-section-gallery">
+              @for (img of section.images; track img.id) {
+                <img class="vt-gallery-img" [src]="img.image" [alt]="img.alt || section.title" loading="lazy">
+              }
+            </div>
+          }
+
+          @if (section.body) {
+            <div class="vt-body-content" [innerHTML]="section.body"></div>
+          }
+
+          @if (section.articles.length > 0) {
+            <div style="margin-top:2.5rem">
+              @for (article of section.articles; track article.id) {
+                <div class="vt-article-item" style="margin-bottom:0.5rem">
+                  <button class="vt-faq-question" [class.open]="activeArticle === article.id"
+                    (click)="toggleArticle(article.id)" type="button">
+                    {{ article.title }}
+                    <svg class="vt-faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                      <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+                    </svg>
+                  </button>
+                  @if (activeArticle === article.id) {
+                    <div class="vt-faq-answer">
+                      @if (article.subtitle) {
+                        <p style="font-style:italic;color:var(--vt-text-muted);margin-bottom:0.75rem">{{ article.subtitle }}</p>
+                      }
+                      <div [innerHTML]="article.text"></div>
+                      @for (img of article.images; track img.id) {
+                        <img [src]="img.image" [alt]="img.alt" loading="lazy"
+                          style="max-width:100%;border-radius:8px;margin-top:1rem">
+                      }
+                    </div>
+                  }
+                </div>
+              }
+            </div>
+          }
+
+        </div>
+
+        <div class="col-lg-4">
+          <div class="vt-service-sidebar">
+            <h3 style="font-size:1.2rem;margin-bottom:1rem">{{ t('header.cta') }}</h3>
+            <p style="font-size:0.875rem;color:var(--vt-text-muted);margin-bottom:1.5rem">
+              {{ t('consultation.subtitle') }}
+            </p>
+            <button class="vt-btn vt-btn-primary" style="width:100%" (click)="openConsultation()">
+              {{ t('home.hero.cta') }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+}
