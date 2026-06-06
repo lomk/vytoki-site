@@ -180,8 +180,15 @@
       <div class="vt-modal-body">
 
         @if (formState === 'success') {
-          <div class="vt-alert vt-alert-success">
-            <strong>✓</strong> {{ t('consultation.success') }}
+          <div style="text-align:center;padding:2rem 1rem">
+            <div style="width:64px;height:64px;border-radius:50%;background:var(--vt-green-pale);display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--vt-green)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+            </div>
+            <h3 style="font-size:1.4rem;margin-bottom:0.5rem">{{ t('consultation.successTitle') }}</h3>
+            <p style="color:var(--vt-text-muted);margin-bottom:1.5rem">{{ t('consultation.success') }}</p>
+            <button class="vt-btn vt-btn-primary" (click)="closeModal()">{{ t('consultation.close') }}</button>
           </div>
         } @else if (formState === 'error') {
           <div class="vt-alert vt-alert-error">

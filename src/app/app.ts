@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener, ChangeDetectorRef } from '@angular/core';
 import { RouterOutlet, RouterLink, RouterLinkActive, Router, NavigationEnd } from '@angular/router';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
@@ -39,6 +39,7 @@ export class App implements OnInit, OnDestroy {
     private api: SectionApiService,
     private router: Router,
     private modalSvc: ModalService,
+    private cdr: ChangeDetectorRef,
   ) {}
 
   ngOnInit(): void {
@@ -131,8 +132,8 @@ export class App implements OnInit, OnDestroy {
       contact_method: val.contact_method,
       message: val.message || undefined,
     }).subscribe({
-      next: () => { this.formState = 'success'; },
-      error: () => { this.formState = 'error'; },
+      next: () => { this.formState = 'success'; this.cdr.markForCheck(); },
+      error: () => { this.formState = 'error'; this.cdr.markForCheck(); },
     });
   }
 }
